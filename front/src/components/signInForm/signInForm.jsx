@@ -9,12 +9,14 @@ function SignInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
+    setIsSubmitting(true)
 
     try {
       const response = await fetch("http://localhost:3001/api/v1/user/login", {
@@ -31,30 +33,34 @@ function SignInForm() {
         dispatch(login(data.body.token))
         navigate("/profile")
       } else {
-        setError("Email ou mot de passe incorrect")
+        setError(data.message || "Email ou mot de passe incorrect")
       }
 
     } catch (error) {
       console.error(error)
       setError("Erreur serveur")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="input-wrapper">
-        <label>Email</label>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label htmlFor="email">Email</label>
+        <input id="email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
 
       <div className="input-wrapper">
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <label htmlFor="password">Password</label>
+        <input id="password" name="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
 
       {error && <p>{error}</p>}
 
-      <button type="submit">Sign In</button>
+      <button className="sign-in-button" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Signing in...' : 'Sign In'}
+      </button>
     </form>
   )
 }

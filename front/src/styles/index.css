@@ -171,6 +171,29 @@ body {
   color: #fff;
 }
 
+.sign-in-button {
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 80ms ease;
+}
+
+.sign-in-button:hover:not(:disabled) {
+  background-color: #02a76a;
+  transform: translateY(-1px);
+}
+
+.sign-in-button:focus {
+  outline: 3px solid rgba(0,188,119,0.18);
+}
+
+.sign-in-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
