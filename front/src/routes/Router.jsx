@@ -3,6 +3,7 @@ import { Navigate, Routes, Route } from 'react-router-dom'
 import Home from '../layout/Home'
 import Login from '../layout/Login'
 import Profile from '../layout/Profile'
+import Transactions from '../layout/Transactions'
 import ProtectedRoute from './ProtectedRoute'
 
 function Router() {
@@ -16,6 +17,15 @@ function Router() {
         element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/transactions"
+        element={
+          <ProtectedRoute>
+            <Transactions />
           </ProtectedRoute>
         }
       />
