@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '../../assets/argentBankLogo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
@@ -21,7 +20,8 @@ function Navbar() {
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
-        <img src={logo} alt="Argent Bank Logo" />
+        <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
+        <h1 className="sr-only">Argent Bank</h1>
       </Link>
 
       <div>
@@ -29,18 +29,18 @@ function Navbar() {
           <>
             <Link className="main-nav-item" to="/profile">
               <FontAwesomeIcon icon={faUserCircle} />
-              {user ? `${user.firstName} ${user.lastName}` : "Profile"}
+              {' '}{user ? `${user.firstName} ${user.lastName}` : "Profile"}
             </Link>
 
-            <button className="main-nav-item" onClick={handleLogout}>
+            <Link className="main-nav-item" to="/" onClick={handleLogout}>
               <FontAwesomeIcon icon={faRightFromBracket} />
-              Sign Out
-            </button>
+              {' '}Sign Out
+            </Link>
           </>
         ) : (
           <Link className="main-nav-item" to="/login">
             <FontAwesomeIcon icon={faUserCircle} />
-            Sign In
+            {' '}Sign In
           </Link>
         )}
       </div>
