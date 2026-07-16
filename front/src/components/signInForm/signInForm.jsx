@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { login } from "../../store/authSlice";
@@ -54,6 +54,11 @@ function SignInForm() {
       <div className="input-wrapper">
         <label htmlFor="password">Password</label>
         <input id="password" name="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+
+      <div className="input-remember">
+        <input id="remember-me" name="remember-me" type="checkbox" />
+        <label htmlFor="remember-me">Remember me</label>
       </div>
 
       {error && <p>{error}</p>}
